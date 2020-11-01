@@ -23,27 +23,6 @@ export default function(state = initialState, action = { type: '' }) {
         isLoading: false,
       };
     }
-
-    case actionTypes.LAUNCHES_GET_FILTER: {
-      return {
-        ...state,
-        filteredLaunches: state.filteredLaunches.filter(launch => {
-          console.log(action.payload.value, launch[action.payload.keyName]);
-           if (action.payload.keyName === 'landSuccess') {
-              return launch.rocket.firstStage.cores[0] === (action.payload.value || null);
-           } else {
-              return launch[action.payload.keyName] === (action.payload.value || null);
-           }
-        }),
-      };
-    }
-
-    case actionTypes.LAUNCHES_CLEAR_FILTER: 
-      return {
-        ...state,
-        filteredLaunches: state.results
-      }
-
     default:
       return state;
   }

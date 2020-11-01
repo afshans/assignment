@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Launch from './Launch';
-import { filterLaunces, getLaunches } from '../../store/actions/spacex/actionsDispatchers';
+import { getLaunches } from '../../store/actions/spacex/actionsDispatchers';
 
 class Launches extends React.Component {
   componentDidMount() {

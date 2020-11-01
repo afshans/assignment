@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { filterLaunces, clearFilters, getLaunches } from '../../../store/actions/spacex/actionsDispatchers';
+import { getLaunches } from '../../../store/actions/spacex/actionsDispatchers';
 import * as CommonConstant from '../../../shared/constatns/common';
 
 class Filter extends Component {
