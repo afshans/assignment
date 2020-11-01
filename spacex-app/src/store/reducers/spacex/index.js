@@ -27,20 +27,22 @@ export default function(state = initialState, action = { type: '' }) {
     case actionTypes.LAUNCHES_GET_FILTER: {
       return {
         ...state,
-        filteredLaunches: state.results.filter(launch => {
-          return launch;
+        filteredLaunches: state.filteredLaunches.filter(launch => {
+          console.log(action.payload.value, launch[action.payload.keyName]);
+           if (action.payload.keyName === 'landSuccess') {
+              return launch.rocket.firstStage.cores[0] === (action.payload.value || null);
+           } else {
+              return launch[action.payload.keyName] === (action.payload.value || null);
+           }
         }),
       };
     }
 
-    case actionTypes.SET_ORDER_BY: {
+    case actionTypes.LAUNCHES_CLEAR_FILTER: 
       return {
         ...state,
-        filteredLaunches: state.filteredLaunche.sort((a, b) => {
-          return action.payload < 0 ? b.id - a.id : a.id - b.id;
-        }),
-      };
-    }
+        filteredLaunches: state.results
+      }
 
     default:
       return state;

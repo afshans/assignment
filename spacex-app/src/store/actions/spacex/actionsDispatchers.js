@@ -1,11 +1,11 @@
 import * as actionTypes from './actionTypes';
 import { getLaunchListCall } from '../../../services/launches/launches.service';
 
-export const getLaunches = page => dispatch => {
+export const getLaunches = (page, filters) => dispatch => {
+  console.log('filters', filters);
   dispatch({ type: actionTypes.LAUNCHES_INIT });
-  getLaunchListCall(page)
+  getLaunchListCall(page, filters)
     .then(data => {
-      console.log('data', data);
       dispatch({ type: actionTypes.LAUNCHES_GET_SUCCESS, payload: data });
     })
     .catch(() => {
@@ -16,16 +16,18 @@ export const getLaunches = page => dispatch => {
     });
 };
 
-export const filterLaunces = name => {
+export const filterLaunces = (keyName, value) => {
   return {
     type: actionTypes.LAUNCHES_GET_FILTER,
-    payload: name,
+    payload: { keyName: keyName , value: value } 
   };
 };
-export const setOrderBy = value => {
+
+export const clearFilters = () => {
   return {
-    type: actionTypes.SET_ORDER_BY,
-    payload: value,
+    type: actionTypes.LAUNCHES_CLEAR_FILTER,
   };
-};
-export default { getLaunches, filterLaunces, setOrderBy };
+  
+}
+
+export default { getLaunches, filterLaunces, clearFilters };

@@ -2,25 +2,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Launch from './Launch';
-import { getLaunches } from '../../store/actions/spacex/actionsDispatchers';
+import { filterLaunces, getLaunches } from '../../store/actions/spacex/actionsDispatchers';
 
 class Launches extends React.Component {
   componentDidMount() {
     const { getLaunchList } = this.props;
-    console.log('Launches',getLaunchList(0));
+    const defaultFilter = { launchYear: '', launchSuccess: null, landSuccess: null };
+    getLaunchList(0, defaultFilter);
+   
   }
 
   render() {
     const { launches } = this.props;
-    const { filteredLaunches } = launches;
+    const { filteredLaunches, isLoading } = launches;
+    let appState = isLoading ? 'Loading........' : filteredLaunches.length > 0 ? '' : 'No Search result found';
     return (
    
-      <div class="col-sm-8 col-md-10">
-        <div class="row">
+      
+      <div className="col-sm-8 col-md-10">
+        <div className="row">
           {filteredLaunches
             && filteredLaunches.map((launch, index) => {
               return <Launch key={index}  launch={launch} />;
             })}
+          { appState }
         </div>
       </div>
     );
@@ -31,14 +36,13 @@ Launches.propTypes = {
   launches: PropTypes.object,
 };
 const mapStateToProps = state => {
-  console.log('State', state);
   return {
     launches: state.launches,
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    getLaunchList: value => dispatch(getLaunches(value)),
+    getLaunchList: (value, filters) => dispatch(getLaunches(value, filters)),
   };
 };
 

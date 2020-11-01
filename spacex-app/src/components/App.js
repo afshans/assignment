@@ -1,21 +1,19 @@
 import React from 'react';
 import './App.scss';
-
+import Header from './Header';
 import SideBar from './SideBar';
 import Launches from './Launches';
+import Footer from './Footer';
 
 const App = () => {
   return (
     <main className="space-x-page">
       <div className="container-fluid">
-        <div className="row mb-5">
-          <div className="col-12">
-            <h1 className="heading">SpacEx Launch programs</h1>
-          </div>
-        </div>
-        <div className="row">
-        <SideBar />
-        <Launches />
+        < Header />
+         <div className="row">
+          <SideBar />
+          <Launches />
+          < Footer />
         </div>
       </div> 
     </main>

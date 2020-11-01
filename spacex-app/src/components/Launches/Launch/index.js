@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const index = props => {
+  
   const { launch } = props;
-  const { missionName, missionId, launchYear, launchSuccess } = launch;
+  const { missionName, missionId, launchYear, launchSuccess, flightNumber } = launch;
 
   return (
     
@@ -12,12 +13,12 @@ const index = props => {
               <img className="image" src={launch.links.missionPatchSmall ? 
                 launch.links.missionPatchSmall : ''} 
                  alt={missionName} 
-              title={missionName} />
-              <h3 className="title">{missionName} #{missionName}</h3>
+               title={missionName} />
+              <h3 className="title">{missionName} #{flightNumber}</h3>
               <div className="list">
                 <label>Mission Ids: </label>
                 <ul className="items">
-                  { missionId.length > 0 ? missionId.map( (mId, Index) => <li className="item"> mId </li> ) : ''}
+                  { missionId.length > 0 ? missionId.map( (mId, Index) => <li className="item" key={Index}> {mId} </li> ) : ''}
                   </ul>
               </div>
               <div className="list">
@@ -26,11 +27,11 @@ const index = props => {
               </div>
               <div className="list">
                 <label>Successful Launch: </label>
-                <span className="item">{launchSuccess ? launchSuccess : 'No'}</span>
+                <span className="item">{launchSuccess ? launchSuccess.toString() : 'false'}</span>
               </div>
               <div className="list">
                 <label>Successful Landing: </label>
-                <span className="item">{launch.rocket.firstStage.cores.landSuccess ? launch.rocket.firstStage.core.landSuccess : 'No'}</span>
+                <span className="item">{launch.rocket.firstStage.cores[0].landSuccess ? launch.rocket.firstStage.cores[0].landSuccess.toString() : 'false'}</span>
               </div>
             </div>
           </div>

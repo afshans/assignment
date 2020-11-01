@@ -1,9 +1,10 @@
 import axios from '../../utils/config';
 import endPoint from '../../utils/endpoints';
 
-export const getLaunchListCall = page => {
+export const getLaunchListCall = (page, filters) => {
+  console.log('filters', filters);
   return axios
-    .get("https://api.spacexdata.com/v3/launches?limit=5")
+    .get(endPoint.getLaunchList(page, filters))
     .then(response => {
       return Promise.resolve(response.data);
     })
