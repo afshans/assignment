@@ -1,0 +1,13 @@
+/* Bootstrap reboot & grid styles */
+@import './styles/vendor/bootstrap-reboot';
+@import './styles/vendor/bootstrap-grid';
+
+body {
+  line-height: 1;
+}
+
+@media (min-width: 700px) {
+  .col-sm-6, .col-md-3 {
+    padding: 0 8px;
+  }
+}
